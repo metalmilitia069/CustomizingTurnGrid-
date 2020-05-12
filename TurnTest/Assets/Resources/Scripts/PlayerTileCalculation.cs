@@ -20,6 +20,9 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
             isInited = true;            
         }
 
-        FindSelectableTiles();
+        if (!isTilesFound)
+        {
+            FindSelectableTiles();
+        }
     }
 }

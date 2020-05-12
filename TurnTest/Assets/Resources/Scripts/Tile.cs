@@ -21,6 +21,8 @@ public class Tile : MonoBehaviour
     public bool isVisited = false;
     public int distance = 0;
 
+    public Tile parent = default;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,7 @@ public class Tile : MonoBehaviour
 
         distance = 0;
 
+        parent = null;
         
     }
 

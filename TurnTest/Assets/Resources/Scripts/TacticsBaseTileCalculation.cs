@@ -13,6 +13,15 @@ public class TacticsBaseTileCalculation : MonoBehaviour
 
     [SerializeField]
     private int _movePoints = 5;
+
+
+    [SerializeField]
+    private Stack<Tile> _stackPath = new Stack<Tile>();
+    public bool isMoving = false;
+
+    //new
+    protected bool isTilesFound = false;
+
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -25,14 +34,14 @@ public class TacticsBaseTileCalculation : MonoBehaviour
         GetCurrentTile();
 
         //BFS Algorithm
-        var process = new Queue<Tile>();
+        var queueProcess = new Queue<Tile>();
 
-        process.Enqueue(currentTile);
+        queueProcess.Enqueue(currentTile);
         currentTile.isVisited = true;
 
-        while (process.Count > 0)
+        while (queueProcess.Count > 0)
         {            
-            Tile t = process.Dequeue();
+            Tile t = queueProcess.Dequeue();
 
             selectableTiles.Add(t);
             t.isSelectable = true;
@@ -40,28 +49,27 @@ public class TacticsBaseTileCalculation : MonoBehaviour
             if (t.distance < _movePoints)
             {               
                 foreach (var tile in t.listOfDetectedTiles)
-                {
-                   
+                {                   
                     if (!tile.isVisited)
                     {
+                        tile.parent = t;
                         tile.isVisited = true;
                         tile.distance = 1 + t.distance;
-                        process.Enqueue(tile);
-                        
+                        queueProcess.Enqueue(tile);                        
                     }
                 }
             }
-
         }
+        isTilesFound = true;
     }
 
     public void GetCurrentTile()
     {
-        currentTile = GetTargetTile(gameObject);
+        currentTile = GetOccupiedTileByTheUnit(gameObject);
         currentTile.isCurrent = true;
     }
 
-    public Tile GetTargetTile(GameObject gameObject)
+    public Tile GetOccupiedTileByTheUnit(GameObject gameObject)
     {
         RaycastHit hit;
         Tile tilePlaceHolder = default;
@@ -71,5 +79,20 @@ public class TacticsBaseTileCalculation : MonoBehaviour
         }
 
         return tilePlaceHolder;
+    }
+
+    public void MoveToDesignatedTile(Tile tile)
+    {
+        tile.isTarget = true;
+        isMoving = true;
+        _stackPath.Clear();
+
+        Tile next = tile;
+        while (!next)
+        {
+            _stackPath.Push(next);
+            next = next.parent;
+        }
+        
     }
 }
