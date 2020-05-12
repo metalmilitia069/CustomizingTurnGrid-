@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8285454878548820448}
   m_Layer: 0
   m_Name: cubo2
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,12 +100,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7230150827828893867}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c83994f554c51164a9cfb32877c741ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWalkable: 0
+  isWalkable: 1
   isCurrent: 0
   isTarget: 0
   isSelectable: 0
+  listOfDetectedTiles: []
+  jumpHeight: 2

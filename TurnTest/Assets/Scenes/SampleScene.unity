@@ -478,9 +478,10 @@ GameObject:
   - component: {fileID: 2030933234}
   - component: {fileID: 2030933233}
   - component: {fileID: 2030933232}
+  - component: {fileID: 2030933236}
   m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
+  m_Name: PlayerPlaceHolder
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -559,6 +560,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2030933236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030933231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9709f7a117c0abd48978e812a36f4e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectableTiles: []
+  tiles: []
+  currentTile: {fileID: 0}
+  _movePoints: 5
 --- !u!1001 &1006150573014143736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -625,6 +642,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cubo2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230150827828893867, guid: 9cd98371ef278df46805910c65324966,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cd98371ef278df46805910c65324966, type: 3}
