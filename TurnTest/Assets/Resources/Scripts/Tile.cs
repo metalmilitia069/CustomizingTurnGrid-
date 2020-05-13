@@ -72,7 +72,12 @@ public class Tile : MonoBehaviour
         isTarget = false;
         isSelectable = false;
 
+        //listOfDetectedTiles.Clear();
+
+        isVisited = false;
+
         referenceTile = default;
+
 
         distance = 0;
 
