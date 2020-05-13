@@ -31,6 +31,9 @@ public class TacticsBaseTileCalculation : MonoBehaviour
     //new
     protected bool isTilesFound = false;
 
+    public delegate void mozo();
+    public static event mozo ssa;
+
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -64,8 +67,7 @@ public class TacticsBaseTileCalculation : MonoBehaviour
                         tile.parent = t;
                         tile.isVisited = true;
                         tile.distance = 1 + t.distance;
-                        queueProcess.Enqueue(tile);
-                        //tile.gameObject.SetActive(true);
+                        queueProcess.Enqueue(tile);                        
                     }
                 }
             }
@@ -140,9 +142,9 @@ public class TacticsBaseTileCalculation : MonoBehaviour
         else
         {
             RemoveSelectableTiles();
-
+            ssa();
             isMoving = false;
-            isTilesFound = false;
+            isTilesFound = false;            
 
             //TurnManager.EndTurn();
         }

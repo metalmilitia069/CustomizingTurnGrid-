@@ -22,26 +22,25 @@ public class Tile : MonoBehaviour
     public bool isVisited = false;
     public int distance = 0;
 
-    public Tile parent = default;
-
-    public event EventHandler sdsa;
+    public Tile parent = default;    
 
     // Start is called before the first frame update
     void Start()
-    {
-        //MyCollisions();
-        //this.gameObject.SetActive(true);
+    {        
+        PlayerTileCalculation.ssa += UnhideTiles;
         ScanTiles();
     }
 
-    void FixedUpdate()
-    {
-        //MyCollisions();
-    }
+    public void UnhideTiles()
+    {        
+        this.gameObject.SetActive(true);
+    }      
 
     // Update is called once per frame
     void Update()
     {
+
+        Debug.DrawRay(transform.position, transform.up);
         if (isCurrent)
         {
             //this.gameObject.SetActive(true);
@@ -60,7 +59,7 @@ public class Tile : MonoBehaviour
         else
         {            
             GetComponent<Renderer>().material.color = Color.white;
-            //this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -101,9 +100,7 @@ public class Tile : MonoBehaviour
         GatherNearbyTiles(Vector3.back);
         GatherNearbyTiles(Vector3.left);
         GatherNearbyTiles(Vector3.right);
-
-        //
-        //this.gameObject.SetActive(false);
+                
     }
 
     public int counnnt = 0;
@@ -126,21 +123,5 @@ public class Tile : MonoBehaviour
             }            
         }
 
-    }
-
-    //void MyCollisions()
-    //{
-    //    //Use the OverlapBox to detect if there are any other colliders within this box area.
-    //    //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
-    //    Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale/2);//, Quaternion.identity, m_LayerMask);
-    //    int i = 0;
-    //    //Check when there is a new collider coming into contact with the box
-    //    while (i < hitColliders.Length)
-    //    {
-    //        //Output all of the collider names
-    //        Debug.Log("Hit : " + hitColliders[i].name + i);
-    //        //Increase the number of Colliders in the array
-    //        i++;
-    //    }
-    //}
+    }    
 }
