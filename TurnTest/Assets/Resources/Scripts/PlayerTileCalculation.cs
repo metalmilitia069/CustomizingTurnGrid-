@@ -26,7 +26,7 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
         if (!isMoving)
         {
             //ssa();
-            FindSelectableTiles();
+            //FindSelectableTiles();
             CheckMouse();
         }
         else
@@ -37,10 +37,10 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
             
         }
 
-        //if (!isTilesFound)
-        //{
-        //    FindSelectableTiles();
-        //}
+        if (!isTilesFound)
+        {
+            FindSelectableTiles();
+        }
     }
 
     public void CheckMouse()

@@ -140,7 +140,9 @@ public class TacticsBaseTileCalculation : MonoBehaviour
         else
         {
             RemoveSelectableTiles();
+
             isMoving = false;
+            isTilesFound = false;
 
             //TurnManager.EndTurn();
         }
