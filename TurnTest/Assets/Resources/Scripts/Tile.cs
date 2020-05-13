@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,10 +24,13 @@ public class Tile : MonoBehaviour
 
     public Tile parent = default;
 
+    public event EventHandler sdsa;
+
     // Start is called before the first frame update
     void Start()
     {
         //MyCollisions();
+        //this.gameObject.SetActive(true);
         ScanTiles();
     }
 
@@ -40,19 +44,23 @@ public class Tile : MonoBehaviour
     {
         if (isCurrent)
         {
+            //this.gameObject.SetActive(true);
             GetComponent<Renderer>().material.color = Color.magenta;
         }
         else if (isTarget)
         {
+            //this.gameObject.SetActive(true);
             GetComponent<Renderer>().material.color = Color.green;
         }
         else if (isSelectable)
         {
+            //this.gameObject.SetActive(true);
             GetComponent<Renderer>().material.color = Color.red;
         }
         else
-        {
+        {            
             GetComponent<Renderer>().material.color = Color.white;
+            //this.gameObject.SetActive(false);
         }
     }
 
@@ -94,6 +102,8 @@ public class Tile : MonoBehaviour
         GatherNearbyTiles(Vector3.left);
         GatherNearbyTiles(Vector3.right);
 
+        //
+        //this.gameObject.SetActive(false);
     }
 
     public int counnnt = 0;

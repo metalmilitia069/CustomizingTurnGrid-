@@ -64,12 +64,14 @@ public class TacticsBaseTileCalculation : MonoBehaviour
                         tile.parent = t;
                         tile.isVisited = true;
                         tile.distance = 1 + t.distance;
-                        queueProcess.Enqueue(tile);                        
+                        queueProcess.Enqueue(tile);
+                        //tile.gameObject.SetActive(true);
                     }
                 }
             }
         }
         isTilesFound = true;
+
     }
 
     public void GetCurrentTile()

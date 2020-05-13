@@ -9,7 +9,10 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
     void Start()
     {
         //Init();
-    }    
+    }
+
+    public delegate void mozo();
+    public static event mozo ssa;
 
     // Update is called once per frame
     void Update()
@@ -22,6 +25,7 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
 
         if (!isMoving)
         {
+            //ssa();
             FindSelectableTiles();
             CheckMouse();
         }
@@ -30,6 +34,7 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
             //Debug.Log("isMoving? " + isMoving);
             Move();
             //isTilesFound = false;
+            
         }
 
         //if (!isTilesFound)
