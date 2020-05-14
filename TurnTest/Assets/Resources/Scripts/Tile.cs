@@ -55,6 +55,7 @@ public class Tile : MonoBehaviour
         {
             //this.gameObject.SetActive(true);
             GetComponent<Renderer>().material.color = Color.red;
+            
         }
         else
         {            
@@ -79,7 +80,7 @@ public class Tile : MonoBehaviour
         isTarget = false;
         isSelectable = false;
 
-        //listOfDetectedTiles.Clear();
+        listOfDetectedTiles.Clear();
 
         isVisited = false;
 

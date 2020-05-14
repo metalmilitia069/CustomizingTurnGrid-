@@ -21,7 +21,8 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
         }
 
         if (!isMoving)
-        {            
+        {
+            //FindSelectableTiles();
             CheckMouse();
         }
         else

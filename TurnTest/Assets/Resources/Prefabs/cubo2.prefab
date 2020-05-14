@@ -111,3 +111,7 @@ MonoBehaviour:
   isSelectable: 0
   listOfDetectedTiles: []
   jumpHeight: 2
+  isVisited: 0
+  distance: 0
+  parent: {fileID: 0}
+  counnnt: 0

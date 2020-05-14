@@ -41,8 +41,22 @@ public class TacticsBaseTileCalculation : MonoBehaviour
         halfHeight = GetComponent<Collider>().bounds.extents.y;
     }
 
+    public void ComputeAdjacencyList()
+    {
+        //tiles = GameObject.FindGameObjectsWithTag("Tile");  //USE HERE IF YOUR TILE MAP CHANGES OFTEN
+
+        foreach (var tile in tiles)
+        {
+            Tile t = tile.GetComponent<Tile>();
+            t.ScanTiles();
+        }
+    }
+
     public void FindSelectableTiles()
     {
+
+        //000000000000000000000000000000000000000000000000
+        ComputeAdjacencyList(); 
         GetCurrentTile();
 
         //BFS Algorithm
