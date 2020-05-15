@@ -31,8 +31,8 @@ public class TacticsBaseTileCalculation : MonoBehaviour
     //new
     protected bool isTilesFound = false;
 
-    public delegate void mozo();
-    public static event mozo ssa;
+    public delegate void OnMovementEnds();
+    public static event OnMovementEnds ssa;
 
     protected void Init()
     {
@@ -74,7 +74,7 @@ public class TacticsBaseTileCalculation : MonoBehaviour
 
             if (t.distance < _movePoints)
             {               
-                foreach (var tile in t.listOfDetectedTiles)
+                foreach (var tile in t.listOfNearbyValidTiles)
                 {                   
                     if (!tile.isVisited)
                     {

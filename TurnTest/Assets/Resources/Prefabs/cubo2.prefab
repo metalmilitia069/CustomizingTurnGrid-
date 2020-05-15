@@ -109,9 +109,8 @@ MonoBehaviour:
   isCurrent: 0
   isTarget: 0
   isSelectable: 0
-  listOfDetectedTiles: []
+  listOfNearbyValidTiles: []
   jumpHeight: 2
   isVisited: 0
   distance: 0
   parent: {fileID: 0}
-  counnnt: 0
