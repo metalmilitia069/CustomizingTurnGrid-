@@ -26,8 +26,10 @@ public class Tile : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
-        PlayerTileCalculation.ssa += UnhideTiles;
+    {
+        TacticsBaseTileCalculation.ssa += UnhideTiles;
+        GridManager.EventScanTilesUpdate += ScanTiles;
+
         ScanTiles();
         GridManager.instance.ListOfTiles.Add(this);
     }

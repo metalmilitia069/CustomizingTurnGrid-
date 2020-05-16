@@ -7,6 +7,8 @@ public class GridManager : MonoBehaviour
     [Header("Tile Data")]
     public List<Tile> ListOfTiles;
 
+    public delegate void OnScanTiles();
+    public static event OnScanTiles EventScanTilesUpdate;
 
     #region Singleton
 
@@ -38,4 +40,11 @@ public class GridManager : MonoBehaviour
     {
         
     }
+
+    public void UpdateScannedTiles()
+    {
+        EventScanTilesUpdate();
+    }
+
+
 }

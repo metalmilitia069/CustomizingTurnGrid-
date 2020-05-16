@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class PlayerTileCalculation : TacticsBaseTileCalculation
 {
-    private bool isInited = false;
+    //private bool isInited = false;
     // Start is called before the first frame update
     void Start()
     {
         //Init();
+        halfHeight = GetComponent<Collider>().bounds.extents.y;        
     }   
 
     // Update is called once per frame
     void Update()
     {
-        if (!isInited)
-        {
-            Init();
-            isInited = true;            
-        }
+        //if (!isInited)
+        //{
+        //    Init();
+        //    isInited = true;
+        //    Debug.Log("INITIATED????????????????????");
+        //}
 
         if (!isMoving)
         {

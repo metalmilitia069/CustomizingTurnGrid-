@@ -6,8 +6,8 @@ public class TacticsBaseTileCalculation : MonoBehaviour
 {
     [SerializeField]
     private List<Tile> selectableTiles = new List<Tile>();
-    [SerializeField]
-    private GameObject[] tiles;
+    //[SerializeField]
+    //private GameObject[] tiles;
     [SerializeField]
     private Tile currentTile;
 
@@ -34,29 +34,29 @@ public class TacticsBaseTileCalculation : MonoBehaviour
     public delegate void OnMovementEnds();
     public static event OnMovementEnds ssa;
 
-    protected void Init()
-    {
-        tiles = GameObject.FindGameObjectsWithTag("Tile");
+    //protected void Init()
+    //{
+    //    //tiles = GameObject.FindGameObjectsWithTag("Tile");
+    //}
+    
+    //public void ComputeAdjacencyList()
+    //{
+    //    //tiles = GameObject.FindGameObjectsWithTag("Tile");  //USE HERE IF YOUR TILE MAP CHANGES OFTEN
 
-        halfHeight = GetComponent<Collider>().bounds.extents.y;
-    }
+    //    foreach (var tile in tiles)
+    //    {
+    //        Tile t = tile.GetComponent<Tile>();
+    //        t.ScanTiles();
+    //    }
 
-    public void ComputeAdjacencyList()
-    {
-        //tiles = GameObject.FindGameObjectsWithTag("Tile");  //USE HERE IF YOUR TILE MAP CHANGES OFTEN
-
-        foreach (var tile in tiles)
-        {
-            Tile t = tile.GetComponent<Tile>();
-            t.ScanTiles();
-        }
-    }
+    //}
 
     public void FindSelectableTiles()
     {
 
         //000000000000000000000000000000000000000000000000
-        ComputeAdjacencyList(); 
+        //ComputeAdjacencyList();
+        GridManager.instance.UpdateScannedTiles();
         GetCurrentTile();
 
         //BFS Algorithm
