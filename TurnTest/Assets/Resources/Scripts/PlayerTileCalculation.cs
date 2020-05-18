@@ -34,7 +34,8 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
 
         if (!isTilesFound)
         {
-            FindSelectableTiles();
+            //FindSelectableTiles();
+            GridManager.instance.CalculateAvailablePath(this.gameObject);
         }
     }
 
@@ -54,7 +55,7 @@ public class PlayerTileCalculation : TacticsBaseTileCalculation
 
                     if (t.isSelectable)
                     {
-                        MoveToDesignatedTile(t);
+                        PathToDesignatedTile(t);
                     }
                 }
             }

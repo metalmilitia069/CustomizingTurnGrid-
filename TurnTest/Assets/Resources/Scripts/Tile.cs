@@ -28,17 +28,23 @@ public class Tile : MonoBehaviour
     void Start()
     {
         TacticsBaseTileCalculation.ssa += UnhideTiles;
+        //TacticsBaseTileCalculation.ssa += NoFlipFlop;
         GridManager.EventScanTilesUpdate += ScanTiles;
 
         ScanTiles();
-        GridManager.instance.ListOfTiles.Add(this);
+        GridManager.instance.listOfTiles.Add(this);
     }
 
     public void UnhideTiles()
     {        
         this.gameObject.SetActive(true);
-    }      
+    }
 
+    //public bool no = false;
+    //public void NoFlipFlop()
+    //{
+    //    no = !no;
+    //}
     // Update is called once per frame
     void Update()
     {
@@ -58,6 +64,10 @@ public class Tile : MonoBehaviour
         else if (isSelectable)
         {
             //this.gameObject.SetActive(true);
+            //if (no)
+            //{
+            //    return;
+            //}
             GetComponent<Renderer>().material.color = Color.blue;
             
         }
@@ -68,15 +78,20 @@ public class Tile : MonoBehaviour
         }
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.magenta;
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
 
-    //    Gizmos.DrawWireCube(transform.position + Vector3.forward, new Vector3(transform.localScale.x/2, transform.localScale.y * jumpHeight, transform.localScale.z/2));
-    //    Gizmos.DrawWireCube(transform.position - Vector3.forward, new Vector3(transform.localScale.x / 2, transform.localScale.y * jumpHeight, transform.localScale.z / 2));
-    //    Gizmos.DrawWireCube(transform.position + Vector3.right, new Vector3(transform.localScale.x / 2, transform.localScale.y * jumpHeight, transform.localScale.z / 2));
-    //    Gizmos.DrawWireCube(transform.position - Vector3.right, new Vector3(transform.localScale.x / 2, transform.localScale.y * jumpHeight, transform.localScale.z / 2));
-    //}
+        //Gizmos.DrawWireCube(transform.position + Vector3.forward, new Vector3(transform.localScale.x / 2, transform.localScale.y * jumpHeight, transform.localScale.z / 2));
+        //Gizmos.DrawWireCube(transform.position - Vector3.forward, new Vector3(transform.localScale.x / 2, transform.localScale.y * jumpHeight, transform.localScale.z / 2));
+        //Gizmos.DrawWireCube(transform.position + Vector3.right, new Vector3(transform.localScale.x / 2, transform.localScale.y * jumpHeight, transform.localScale.z / 2));
+        //Gizmos.DrawWireCube(transform.position - Vector3.right, new Vector3(transform.localScale.x / 2, transform.localScale.y * jumpHeight, transform.localScale.z / 2));
+
+        Gizmos.DrawWireCube(transform.position + Vector3.forward, new Vector3(transform.localScale.x / 2, jumpHeight, transform.localScale.z / 2));
+        Gizmos.DrawWireCube(transform.position - Vector3.forward, new Vector3(transform.localScale.x / 2, jumpHeight, transform.localScale.z / 2));
+        Gizmos.DrawWireCube(transform.position + Vector3.right, new Vector3(transform.localScale.x / 2, jumpHeight, transform.localScale.z / 2));
+        Gizmos.DrawWireCube(transform.position - Vector3.right, new Vector3(transform.localScale.x / 2, jumpHeight, transform.localScale.z / 2));
+    }
 
     public void ResetTileData()
     {
@@ -117,10 +132,11 @@ public class Tile : MonoBehaviour
         {  
             
             referenceTile = col.GetComponent<Tile>();
-            if (referenceTile && referenceTile.isWalkable)
+            if (referenceTile) //&& referenceTile.isWalkable)
             {                
                 RaycastHit hit;
                 if (!Physics.Raycast(referenceTile.transform.position, Vector3.up, out hit, 1))
+                //if (Physics.OverlapBox(transform.position, halfExtends) == null)                
                 {
                     listOfNearbyValidTiles.Add(referenceTile);
                 }

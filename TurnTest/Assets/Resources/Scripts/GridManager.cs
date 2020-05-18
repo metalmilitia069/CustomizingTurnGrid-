@@ -5,7 +5,10 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [Header("Tile Data")]
-    public List<Tile> ListOfTiles;
+    public List<Tile> listOfTiles;
+    public List<Tile> listOfSelectableTiles;
+
+    public Tile tilePlaceholder;
 
     public delegate void OnScanTiles();
     public static event OnScanTiles EventScanTilesUpdate;
@@ -44,6 +47,56 @@ public class GridManager : MonoBehaviour
     public void UpdateScannedTiles()
     {
         EventScanTilesUpdate();
+    }
+
+    public void GetCurrentTile(GameObject characterStandingOnTile)
+    {
+        RaycastHit hit;
+        //Tile tilePlaceholder;
+
+        if (Physics.Raycast(characterStandingOnTile.transform.position, Vector3.down, out hit, 1))
+        {
+            tilePlaceholder = hit.collider.transform.GetComponent<Tile>();
+            tilePlaceholder.isCurrent = true;
+        }
+    }
+
+    public void CalculateAvailablePath(GameObject character)
+    {
+        UpdateScannedTiles();
+        GetCurrentTile(character);
+        TacticsBaseTileCalculation baseCharacter = character.GetComponent<TacticsBaseTileCalculation>();
+        //GetCurrentTile();
+
+        //BFS Algorithm
+        var queueProcess = new Queue<Tile>();
+
+        queueProcess.Enqueue(tilePlaceholder);
+        tilePlaceholder.isVisited = true;
+
+        while (queueProcess.Count > 0)
+        {
+            Tile t = queueProcess.Dequeue();
+
+            listOfSelectableTiles.Add(t);
+            t.isSelectable = true;
+
+            if (t.distance < baseCharacter._movePoints) 
+            {
+                foreach (var tile in t.listOfNearbyValidTiles)
+                {
+                    if (!tile.isVisited)
+                    {
+                        tile.parent = t;
+                        tile.isVisited = true;
+                        tile.distance = 1 + t.distance;
+                        queueProcess.Enqueue(tile);
+                    }
+                }
+            }
+        }
+        baseCharacter.currentTile = tilePlaceholder;
+        baseCharacter.isTilesFound = true;
     }
 
 

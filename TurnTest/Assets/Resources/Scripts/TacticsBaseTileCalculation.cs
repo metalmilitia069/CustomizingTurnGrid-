@@ -9,10 +9,10 @@ public class TacticsBaseTileCalculation : MonoBehaviour
     //[SerializeField]
     //private GameObject[] tiles;
     [SerializeField]
-    private Tile currentTile;
+    public Tile currentTile;
 
     [SerializeField]
-    private int _movePoints = 5;
+    public int _movePoints = 5;
 
 
     [SerializeField]
@@ -29,7 +29,7 @@ public class TacticsBaseTileCalculation : MonoBehaviour
     public bool turn = false;
 
     //new
-    protected bool isTilesFound = false;
+    public bool isTilesFound = false;
 
     public delegate void OnMovementEnds();
     public static event OnMovementEnds ssa;
@@ -51,64 +51,65 @@ public class TacticsBaseTileCalculation : MonoBehaviour
 
     //}
 
-    public void FindSelectableTiles()
-    {
+    //public void FindSelectableTiles()
+    //{
 
-        //000000000000000000000000000000000000000000000000
-        //ComputeAdjacencyList();
-        GridManager.instance.UpdateScannedTiles();
-        GetCurrentTile();
+    //    //000000000000000000000000000000000000000000000000
+    //    //ComputeAdjacencyList();
+    //    GridManager.instance.UpdateScannedTiles();
+    //    GridManager.instance.GetCurrentTile(this.gameObject);
+    //    //GetCurrentTile();
+    //    currentTile = GridManager.instance.tilePlaceholder;
+    //    //BFS Algorithm
+    //    var queueProcess = new Queue<Tile>();
 
-        //BFS Algorithm
-        var queueProcess = new Queue<Tile>();
+    //    queueProcess.Enqueue(currentTile);
+    //    currentTile.isVisited = true;
 
-        queueProcess.Enqueue(currentTile);
-        currentTile.isVisited = true;
+    //    while (queueProcess.Count > 0)
+    //    {            
+    //        Tile t = queueProcess.Dequeue();
 
-        while (queueProcess.Count > 0)
-        {            
-            Tile t = queueProcess.Dequeue();
+    //        selectableTiles.Add(t);
+    //        t.isSelectable = true;
 
-            selectableTiles.Add(t);
-            t.isSelectable = true;
+    //        if (t.distance < _movePoints)
+    //        {               
+    //            foreach (var tile in t.listOfNearbyValidTiles)
+    //            {                   
+    //                if (!tile.isVisited)
+    //                {
+    //                    tile.parent = t;
+    //                    tile.isVisited = true;
+    //                    tile.distance = 1 + t.distance;
+    //                    queueProcess.Enqueue(tile);                        
+    //                }
+    //            }
+    //        }
+    //    }
+    //    isTilesFound = true;
 
-            if (t.distance < _movePoints)
-            {               
-                foreach (var tile in t.listOfNearbyValidTiles)
-                {                   
-                    if (!tile.isVisited)
-                    {
-                        tile.parent = t;
-                        tile.isVisited = true;
-                        tile.distance = 1 + t.distance;
-                        queueProcess.Enqueue(tile);                        
-                    }
-                }
-            }
-        }
-        isTilesFound = true;
+    //}
 
-    }
+    //public void GetCurrentTile()
+    //{
+    //    currentTile = GetOccupiedTileByTheUnit(gameObject);
+    //    currentTile.isCurrent = true;
+    //}
 
-    public void GetCurrentTile()
-    {
-        currentTile = GetOccupiedTileByTheUnit(gameObject);
-        currentTile.isCurrent = true;
-    }
+    //public Tile GetOccupiedTileByTheUnit(GameObject gameObject)
+    //{
+    //    RaycastHit hit;
+    //    Tile tilePlaceHolder = default;
+    //    if (Physics.Raycast(transform.position, Vector3.down, out hit, 1))
+    //    {
+    //        tilePlaceHolder = hit.collider.GetComponent<Tile>();
+    //    }
 
-    public Tile GetOccupiedTileByTheUnit(GameObject gameObject)
-    {
-        RaycastHit hit;
-        Tile tilePlaceHolder = default;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1))
-        {
-            tilePlaceHolder = hit.collider.GetComponent<Tile>();
-        }
+    //    return tilePlaceHolder;
+    //}
 
-        return tilePlaceHolder;
-    }
-
-    public void MoveToDesignatedTile(Tile tile)
+    public void PathToDesignatedTile(Tile tile)
     {
         tile.isTarget = true;
         isMoving = true;
@@ -117,6 +118,8 @@ public class TacticsBaseTileCalculation : MonoBehaviour
         Tile next = tile;
         while (next != null)
         {
+            //next.no = true;
+            //next.GetComponent<Renderer>().material.color = Color.yellow;
             _stackPath.Push(next);
             next = next.parent;
         }        
