@@ -10,6 +10,8 @@ public class Tile : MonoBehaviour
     public bool isTarget = false;
     public bool isSelectable = false;
 
+    public bool isLatter = false;
+
     public List<Tile> listOfNearbyValidTiles;
 
     public int jumpHeight = 100;
@@ -69,6 +71,10 @@ public class Tile : MonoBehaviour
             //    return;
             //}
             GetComponent<Renderer>().material.color = Color.blue;
+            if (isLatter)
+            {
+                GetComponent<Renderer>().material.color = Color.yellow;
+            }
             
         }
         else
@@ -109,6 +115,8 @@ public class Tile : MonoBehaviour
         distance = 0;
 
         parent = null;
+
+        isLatter = default;
         
     }
 
@@ -120,7 +128,8 @@ public class Tile : MonoBehaviour
         GatherNearbyTiles(Vector3.back);
         GatherNearbyTiles(Vector3.left);
         GatherNearbyTiles(Vector3.right);
-                
+
+        //CheckTileType();
     }
 
     public void GatherNearbyTiles(Vector3 direction)
@@ -140,8 +149,84 @@ public class Tile : MonoBehaviour
                 {
                     listOfNearbyValidTiles.Add(referenceTile);
                 }
+                //else
+                //{
+                //    //Debug.Log("ai dentu");
+                //    //Latter latter = 
+                //    if (hit.transform.GetComponent<Latter>())
+                //    {
+                //        //Debug.Log("MOZO");
+                //        listOfNearbyValidTiles.Add(referenceTile);
+                //        //isLatter = true;
+                //    }
+
+                //}
+
+
+                //else if (hit.collider.GetComponent<Latter>())
+                //{
+
+                //}
             }            
         }
 
-    }    
+    }
+
+    public void CheckTileType()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 1))
+        //if (Physics.OverlapBox(transform.position, halfExtends) == null)                
+        {
+            Latter latter = hit.transform.GetComponent<Latter>();
+
+            if (hit.transform.GetComponent<Latter>())
+            {
+                isLatter = true;
+                Collider[] colliders = Physics.OverlapBox(transform.position + latter.direction, latter.latterHeight);
+                foreach (var col in colliders)
+                {
+                    referenceTile = col.GetComponent<Tile>();
+                    if (referenceTile)
+                    {
+                        listOfNearbyValidTiles.Add(referenceTile);
+                    }
+                }
+            }
+        }
+    }
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    Latter latter = other.GetComponent<Latter>();
+    //    if (latter)
+    //    {
+    //        Debug.Log("MOZO");
+    //        Debug.Log(latter.direction);
+
+    //    }
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Latter latter = other.GetComponent<Latter>();
+    //    if (latter)
+    //    {
+    //        Debug.Log("MOZO");
+    //        Debug.Log(latter.direction);
+
+    //    }
+    //}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log("MOZO");
+    //    Latter latter = collision.gameObject.GetComponent<Latter>();
+    //    if (latter)
+    //    {
+    //        Debug.Log("MOZO");
+    //        Debug.Log(latter.direction);
+
+    //    }
+    //}
 }
