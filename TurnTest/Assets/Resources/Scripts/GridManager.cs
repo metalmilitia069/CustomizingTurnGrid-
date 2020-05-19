@@ -54,16 +54,16 @@ public class GridManager : MonoBehaviour
         RaycastHit hit;
         //Tile tilePlaceholder;
 
-        LayerMask mask = LayerMask.GetMask("TileLayer");
+        //LayerMask mask = LayerMask.GetMask("TileLayer");
 
         if (Physics.Raycast(characterStandingOnTile.transform.position, Vector3.down, out hit, 1))
         {            
             tilePlaceholder = hit.collider.transform.GetComponent<Tile>();
-            if (tilePlaceholder)
-            {
+            //if (tilePlaceholder)
+            //{
                 tilePlaceholder.isCurrent = true;
                 Debug.Log("mozovos, carai");
-            }
+            //}
         }
     }
 

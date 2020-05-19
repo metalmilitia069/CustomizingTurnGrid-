@@ -141,7 +141,7 @@ public class Tile : MonoBehaviour
         {  
             
             referenceTile = col.GetComponent<Tile>();
-            if (referenceTile) //&& referenceTile.isWalkable)
+            if (referenceTile != null) //&& referenceTile.isWalkable)
             {                
                 RaycastHit hit;
                 if (!Physics.Raycast(referenceTile.transform.position, Vector3.up, out hit, 1))
